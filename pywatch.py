@@ -2,6 +2,7 @@
 
 # Usage: ./pywatch.py <path> [-d]
 # path is location of your python code which you want
+# -d is optional argument which prints python file that changed
 # to monitor for changes.
 
 # Example:
