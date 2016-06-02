@@ -16,10 +16,9 @@
 # virtual environment (http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 
 # Explanation:
-# Frappe Production setup has an annoying caching issue, where 
-# modifications of python code inside an app doesn't take
-# effect until you run "bench restart". bench restart usually
-# takes around 10-13 seconds which is annoying and slow.
+# While testing code on a Frappe Production setup, modifications
+# of python code inside an app don't take effect until you run
+# "bench restart", which usually takes around 10-13 seconds.
 # We discovered that by killing gunicorn (pkill gunicord), the
 # python code gets reloaded and gunicorn process gets
 # restarted almost instantly.
