@@ -28,7 +28,10 @@
 # This script watches for changes in python files and
 # automatically triggers gunicord restart whenever a
 # python file changes, so the changes in the code take
-# effect almost instantly.
+# effect almost instantly. This speeds up development
+# process and makes it possible to modify python code
+# in production without 13 second downtime caused by
+# running "bench restart".
 
 # TODO:
 #  -possibly exclude .git directory with exclude_filter
