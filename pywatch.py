@@ -54,10 +54,19 @@ notifier = pyinotify.Notifier(wm)
 def on_event(arg):
    name = arg.pathname
    #print('event %s' % name)
-   if name.split('.')[-1] == 'py':
+   ext = name.split('.')[-1]
+   if ext in ('py'):
       if debug:
-         print('python file changed: %s' % name)
+         print('file changed: %s' % name)
       subprocess.call(['pkill', 'gunicorn'])
+
+   if ext in ('js', 'css'):
+      subprocess.call(['bench', 'build'])
+
+   if ext in ('py', 'html', 'js', 'css'):
+      subprocess.call(['bench', 'clear-website-cache'])
+      subprocess.call(['bench', 'clear-cache'])
+
 
 #watch_mask = pyinotify.ALL_EVENTS
 watch_mask = pyinotify.IN_CREATE | pyinotify.IN_MODIFY
