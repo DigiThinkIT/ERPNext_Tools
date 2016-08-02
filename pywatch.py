@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-# Usage: ./pywatch.py <path> [-d]
+# Usage: ./pywatch.py <path> [-d] &
 # path is location of your python code which you want
+# -d is optional argument which prints python file that changed
 # to monitor for changes.
 
 # Example:
@@ -15,19 +16,22 @@
 # virtual environment (http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 
 # Explanation:
-# ERPNext has a funky caching issue, where if you modify 
-# python file inside an app, ERPNext doesn't pick up the changes
-# until you run "bench restart". bench restart usually takes
-# around 10-13 seconds which is very annoying and slow. We
-# discovered that by killing gunicorn (pkill gunicord), the
+# While testing code on a Frappe Production setup, modifications
+# of python code inside an app don't take effect until you run
+# "bench restart", which usually takes around 10-13 seconds.
+# We discovered that by killing gunicorn (pkill gunicord), the
 # python code gets reloaded and gunicorn process gets
-# restarted automatically. Killing gunicorn is almost
-# instant, so it's much faster than running bench restart.
+# restarted almost instantly.
 # 
 # This script watches for changes in python files and
 # automatically triggers gunicord restart whenever a
-# python file changes, so the changes in the code take
-# effect almost instantly.
+# python file changes. This speeds up development
+# process and makes it possible to modify python code
+# in production without 13 second downtime caused by
+# running "bench restart".
+
+# Note that this script isn't necessary in Development
+# Setup of bench, and only applies to Production version.
 
 # TODO:
 #  -possibly exclude .git directory with exclude_filter
